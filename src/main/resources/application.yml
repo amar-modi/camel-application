@@ -1,0 +1,53 @@
+spring:
+  profiles:
+    active: @spring.profiles.active@
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/camelDb
+    username: user
+    password: password
+  h2:
+    console:
+      enabled: true
+  activemq:
+    brokerUrl: tcp://localhost:61616
+    user: admin
+    password: admin
+
+server:
+  port: 8080
+camel:
+  springboot:
+    name: ServicesRest
+management:
+  port: 8081
+endpoints:
+  enabled: false
+  health:
+    enabled: true
+quickstart:
+  generateOrderPeriod: 10s
+  processOrderPeriod: 30s
+api:
+  path: '/camel'
+sqlRoute: jdbc:dataSource
+errorQueue: activemq:errorItemQueue
+toRoute: jdbc:dataSource
+selectNode: sql:select * from input_posts where id =:#id?dataSource=#dataSource
+selectCountryNode: sql:select * from country where country_code=:#countryId?dataSource=#dataSource
+restEndpointRoute: http://localhost:8082/country
+restClient: timer:restRoute?period=10s
+dbNode: jdbc:dataSource
+
+---
+spring:
+  profiles: CI-DEV
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/camelDb
+    username: user
+    password: password
+  activemq:
+    brokerUrl: tcp://localhost:61616
+    user: admin
+    password: admin
