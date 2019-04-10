@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.amarmodi</groupId>
     <artifactId>camel-demo</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.6-SNAPSHOT</version>
     <name>camel-demo</name>
     <description>Demo project for Spring Boot</description>
 
@@ -142,9 +142,18 @@
 
     <profiles>
         <profile>
-            <id>dev</id>
+            <id>default</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring.profiles.active>default</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <spring.profiles.active>CI-DEV</spring.profiles.active>

@@ -44,10 +44,10 @@ spring:
   profiles: CI-DEV
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/camelDb
+    url: jdbc:postgresql://postgres:5432/camelDb
     username: user
     password: password
   activemq:
-    brokerUrl: tcp://localhost:61616
+    brokerUrl: tcp://mq-msg:61616
     user: admin
     password: admin

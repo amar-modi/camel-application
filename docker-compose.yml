@@ -6,7 +6,7 @@ services:
       - "8080:8080"
       - "8081:8081"
       - "8082:8082"
-  activemq-msg:
+  mq-msg:
     image: "webcenter/activemq:latest"
     ports:
       - "8161:8161"
