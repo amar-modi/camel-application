@@ -8,7 +8,6 @@ public class CamelDemoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CamelDemoApplication.class, args);
-        System.out.println("HELLO APP STARTED");
     }
 
 }

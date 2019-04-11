@@ -1,7 +1,9 @@
 package com.amarmodi.cameldemo.domain;
 
 
-public class InputPost {
+import java.io.Serializable;
+
+public class InputPost implements Serializable {
 
     private int id;
     private String name;
@@ -32,7 +34,7 @@ public class InputPost {
 
     @Override
     public String toString() {
-        return "InputPost{" +
+        return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

@@ -8,6 +8,6 @@ public class SuccessProcessor implements org.apache.camel.Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
-        exchange.getIn().setBody("Data Updated Successfully");
+        exchange.getOut().setBody("Data Updated Successfully");
     }
 }

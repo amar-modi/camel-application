@@ -20,7 +20,7 @@ public class Bootstrap implements
     private JdbcTemplate jdbcTemplate;
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        jdbcTemplate.execute("Create table if not exists INPUT_POSTS (id numeric, name varchar(255));");
+        jdbcTemplate.execute("Create table if not exists INPUT_POSTS ( id numeric ,name varchar(255));");
         jdbcTemplate.execute("Create table if not exists COUNTRY (country_i serial,name text    , country_code text, population numeric, crte_ts timestamp default now());");
     }
 }
