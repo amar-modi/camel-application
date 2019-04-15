@@ -11,7 +11,7 @@ public class BuildSQLProcessor implements org.apache.camel.Processor {
     public void process(Exchange exchange) throws Exception {
         InputPost input  = (InputPost) exchange.getIn().getBody();
         StringBuilder query = new StringBuilder();
-        query.append("INSERT INTO INPUT_POSTS ( NAME) VALUES ('" + input.getName() + "');");
+        query.append("INSERT INTO INPUT_POSTS (NAME, ID) VALUES ('" + input.getName() + "'," + input.getId() +");");
         exchange.getIn().setBody(query.toString());
         exchange.getIn().setHeader("id",input.getId());
 

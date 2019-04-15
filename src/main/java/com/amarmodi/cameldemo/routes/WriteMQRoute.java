@@ -13,6 +13,9 @@ public class WriteMQRoute extends RouteBuilder {
                 .routeId("mq-write-route")
                 .log("The body is 333333333 ${body}")
                 .to("log:?level=INFO&showBody=true")
-                .to(ExchangePattern.InOnly,"activemq:queue:dummyItemQueue");
+                .loadBalance().random()
+                    .to(ExchangePattern.InOnly,"activemq:queue:dummyItemQueue1")
+                    .to(ExchangePattern.InOnly,"activemq:queue:dummyItemQueue2")
+                .end();
     }
 }

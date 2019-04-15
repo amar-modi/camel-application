@@ -15,9 +15,9 @@ public class RowProcessor implements org.apache.camel.Processor {
         List<Map<String, Object>> rows = (List<Map<String, Object>>) exchange.getIn().getBody();
         Map<String,Object> row = rows.get(0);
         InputPost inputPost = new InputPost();
-        BigDecimal id = (BigDecimal) row.get("ID");
+        BigDecimal id = (BigDecimal) row.get("id");
         inputPost.setId(id.intValueExact());
-        inputPost.setName((String)row.get("NAME"));
+        inputPost.setName((String)row.get("name"));
         exchange.getOut().setBody(inputPost);
 
     }

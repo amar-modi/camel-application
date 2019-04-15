@@ -1,14 +1,6 @@
 spring:
   profiles:
     active: @spring.profiles.active@
-#  datasource:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:mem:testdb
-#    username: sa
-#    password:
-#  h2:
-#    console:
-#      enabled: true
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/camelDb
@@ -19,11 +11,26 @@ spring:
     user: admin
     password: admin
 
+logging:
+  level:
+    org.apache.camel: DEBUG
+
 server:
   port: 8080
+
+account:
+  consul:
+      domain: localhost
+      self-domain: localhost
+      start: http://${account.consul.domain}:8500/v1/agent/service/register
+      stop: http://${account.consul.domain}:8500/v1/agent/service/deregister
+  server:
+    port: 8083
+
 camel:
   springboot:
     name: ServicesRest
+    main-run-controller: true
 management:
   port: 8081
 endpoints:
@@ -35,6 +42,7 @@ quickstart:
   processOrderPeriod: 30s
 api:
   path: '/camel'
+
 sqlRoute: jdbc:dataSource
 errorQueue: activemq:errorItemQueue
 toRoute: jdbc:dataSource
@@ -44,6 +52,7 @@ restEndpointRoute: http://localhost:8082/country
 restClient: timer:restRoute?period=10s
 dbNode: jdbc:dataSource
 writeMQRoute: direct:writeQueue
+
 ---
 spring:
   profiles: CI-DEV
@@ -56,3 +65,10 @@ spring:
     brokerUrl: tcp://mq-msg:61616
     user: admin
     password: admin
+
+account:
+  consul:
+    self-domain: camel-app
+    domain: consul
+  server:
+    port: 8083

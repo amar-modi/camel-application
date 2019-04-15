@@ -17,6 +17,8 @@
     <properties>
         <java.version>1.8</java.version>
         <camel.version>2.23.1</camel.version>
+        <docker.image.prefix>amarmodi1784</docker.image.prefix>
+        <docker.image.name>camel-rest-service</docker.image.name>
     </properties>
 
     <dependencies>
@@ -138,6 +140,12 @@
 
         <dependency>
             <groupId>org.apache.camel</groupId>
+            <artifactId>camel-netty-http</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
             <artifactId>camel-test-spring</artifactId>
             <version>${camel.version}</version>
             <scope>test</scope>
@@ -147,6 +155,12 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>9.4.1212</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-consul-starter</artifactId>
+            <version>${camel.version}</version>
         </dependency>
 
     </dependencies>
@@ -179,11 +193,57 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>io.fabric8</groupId>-->
+<!--                <artifactId>docker-maven-plugin</artifactId>-->
+<!--                <version>0.28.0</version>-->
+
+<!--                <configuration>-->
+
+<!--                    &lt;!&ndash;<dockerHost>http://127.0.0.1:2375</dockerHost>&ndash;&gt;-->
+<!--                    <dockerHost>unix:///var/run/docker.sock</dockerHost>-->
+
+<!--                    <verbose>true</verbose>-->
+<!--                    <images>-->
+<!--                        <image>-->
+<!--                            <alias>camel-app</alias>-->
+<!--                            <name>${docker.image.prefix}/${docker.image.name}</name>-->
+<!--                            <external>-->
+<!--                                <type>compose</type>-->
+<!--                                <basedir>./</basedir>-->
+<!--                                <composeFile>docker-compose.yml</composeFile>-->
+<!--                            </external>-->
+<!--                            <build>-->
+<!--                                <dockerFileDir>${project.basedir}</dockerFileDir>-->
+
+<!--                                &lt;!&ndash;copies artficact to docker build dir in target&ndash;&gt;-->
+<!--                                <assembly>-->
+<!--                                    <descriptorRef>artifact</descriptorRef>-->
+<!--                                </assembly>-->
+<!--                                <tags>-->
+<!--                                    <tag>latest</tag>-->
+<!--                                    <tag>${project.version}</tag>-->
+<!--                                </tags>-->
+<!--                            </build>-->
+<!--&lt;!&ndash;                            <run>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <ports>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <port>8080:8080</port>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <port>8081:8081</port>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <port>8082:8082</port>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <port>8083:8083</port>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </ports>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </run>&ndash;&gt;-->
+<!--                        </image>-->
+<!--                    </images>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
         </plugins>
     </build>
 

@@ -1,11 +1,18 @@
-version: '3'
+version: '2'
 services:
   camel-app:
     build: .
+#    image: "amarmodi1784/camel-rest-service:latest"
     ports:
       - "8080:8080"
       - "8081:8081"
       - "8082:8082"
+      - "8083:8083"
+  gateway:
+    image: "amarmodi1784/camel-consul-gateway"
+    ports:
+      - "8000:8000"
+      - "8084:8084"
   mq-msg:
     image: "webcenter/activemq:latest"
     ports:
@@ -20,3 +27,8 @@ services:
       POSTGRES_USER: 'user'
       POSTGRES_PASSWORD: 'password'
       POSTGRES_DB: 'camelDb'
+  consul:
+    image: consul
+    ports:
+      - "8500:8500"
+      - "8600:8600"
