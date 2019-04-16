@@ -7,6 +7,7 @@ import com.amarmodi.cameldemo.processors.CountrySelectProcessor;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.gson.GsonDataFormat;
+import org.apache.camel.component.jackson.JacksonDataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,7 @@ public class CountryRestRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        GsonDataFormat countryFormat = new GsonDataFormat(Country.class);
+        JacksonDataFormat countryFormat = new JacksonDataFormat(Country.class);
         // POST Endpoint
         from("restlet:http://localhost:8082/country?restletMethods=POST").routeId("countryPostRoute")
         .log("Received body is ${body}")

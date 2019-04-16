@@ -5,6 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
+<!--        1.5.xx-->
         <version>2.1.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
@@ -196,54 +197,15 @@
 
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+            </plugin>
+
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>io.fabric8</groupId>-->
-<!--                <artifactId>docker-maven-plugin</artifactId>-->
-<!--                <version>0.28.0</version>-->
-
-<!--                <configuration>-->
-
-<!--                    &lt;!&ndash;<dockerHost>http://127.0.0.1:2375</dockerHost>&ndash;&gt;-->
-<!--                    <dockerHost>unix:///var/run/docker.sock</dockerHost>-->
-
-<!--                    <verbose>true</verbose>-->
-<!--                    <images>-->
-<!--                        <image>-->
-<!--                            <alias>camel-app</alias>-->
-<!--                            <name>${docker.image.prefix}/${docker.image.name}</name>-->
-<!--                            <external>-->
-<!--                                <type>compose</type>-->
-<!--                                <basedir>./</basedir>-->
-<!--                                <composeFile>docker-compose.yml</composeFile>-->
-<!--                            </external>-->
-<!--                            <build>-->
-<!--                                <dockerFileDir>${project.basedir}</dockerFileDir>-->
-
-<!--                                &lt;!&ndash;copies artficact to docker build dir in target&ndash;&gt;-->
-<!--                                <assembly>-->
-<!--                                    <descriptorRef>artifact</descriptorRef>-->
-<!--                                </assembly>-->
-<!--                                <tags>-->
-<!--                                    <tag>latest</tag>-->
-<!--                                    <tag>${project.version}</tag>-->
-<!--                                </tags>-->
-<!--                            </build>-->
-<!--&lt;!&ndash;                            <run>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <ports>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <port>8080:8080</port>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <port>8081:8081</port>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <port>8082:8082</port>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <port>8083:8083</port>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </ports>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </run>&ndash;&gt;-->
-<!--                        </image>-->
-<!--                    </images>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-
         </plugins>
     </build>
 

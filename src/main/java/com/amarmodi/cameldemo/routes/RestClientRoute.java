@@ -23,7 +23,7 @@ public class RestClientRoute extends RouteBuilder {
                 .setHeader(Exchange.HTTP_URI, simple("https://restcountries.eu/rest/v2/alpha/${header.countryId}"))
                 // Accessing the url and converting to string
                 .to("https://restcountries.eu/rest/v2/alpha/us").convertBodyTo(String.class)
-                .log("The REST API returned: ${body}")
+//                .log("The REST API returned: ${body}")
                 .removeHeader(Exchange.HTTP_URI)
                 .setHeader(Exchange.HTTP_METHOD, constant("POST"))
         .to("{{restEndpointRoute}}");

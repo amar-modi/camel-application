@@ -44,6 +44,9 @@ api:
   path: '/camel'
 
 sqlRoute: jdbc:dataSource
+loggingPostRoute: direct:loggingPostRoute
+secondLevelPostRoute: direct:secondLevelPostRoute
+processMQMessageRoute: direct:processMQMessageRoute
 errorQueue: activemq:errorItemQueue
 toRoute: jdbc:dataSource
 selectNode: sql:select * from input_posts where id =:#id?dataSource=#dataSource

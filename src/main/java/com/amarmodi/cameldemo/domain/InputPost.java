@@ -34,7 +34,7 @@ public class InputPost implements Serializable {
 
     @Override
     public String toString() {
-        return "{" +
+        return "InputPost{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

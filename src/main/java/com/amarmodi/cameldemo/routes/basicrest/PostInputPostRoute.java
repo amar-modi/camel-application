@@ -1,12 +1,10 @@
 package com.amarmodi.cameldemo.routes.basicrest;
 
-import com.amarmodi.cameldemo.domain.Country;
 import com.amarmodi.cameldemo.domain.InputPost;
 import com.amarmodi.cameldemo.processors.BuildSQLProcessor;
 import com.amarmodi.cameldemo.processors.InputValidationProcessor;
-import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.component.gson.GsonDataFormat;
+import org.apache.camel.component.jackson.JacksonDataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,29 +20,25 @@ public class PostInputPostRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        GsonDataFormat postFormat = new GsonDataFormat(InputPost.class);
+        JacksonDataFormat postFormat = new JacksonDataFormat(InputPost.class);
 
-
+        // TODO NEsted route 1/2/3/ more routes consume throw an exception on last route
+        // should be sending back 500 error code and message
+        // send body as json
+        // DELETE/ PUT
+        // MongoDB
+        // push the json to MongoDB insert delete find findAll
+        // Any error send 500 and error message
+        // Jackson Not Gson
+        // Week after next
         // POST
         from("direct:dbService")
                 .routeId("direct-route")
                 .tracing()
-                .process(inputValidationProcessor)
                 .log(">>> ${body.id}")
                 .log(">>> ${body.name}")
-                .convertBodyTo(String.class)
                 .log("The converted body is ${body}")
-                .to("{{writeMQRoute}}");
-
-        from("activemq:queue:dummyItemQueue1","activemq:queue:dummyItemQueue2")
-                .routeId("direct-response")
-                .log("Messsage read from AMQ Queue : ${body}")
-//                .transform(simple("The queue works successfully ${body}"))
-                .convertBodyTo(String.class)
-                .unmarshal(postFormat)
-                .process(buildSQLProcessor)
-                .to("{{dbNode}}")
-                .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(201));
+                .to("{{loggingPostRoute}}");
 
     }
 }

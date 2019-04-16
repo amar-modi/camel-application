@@ -7,6 +7,7 @@ import com.amarmodi.cameldemo.processors.ValidateActiveMQMessageProcessor;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.gson.GsonDataFormat;
+import org.apache.camel.component.jackson.JacksonDataFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,7 @@ public class ActiveMQRoute extends RouteBuilder {
         onException(InvalidMessageException.class).log(LoggingLevel.ERROR, "Invalid Message was sent ${body}")
                 .to("{{errorQueue}}");
 
-        GsonDataFormat inputPostDataFormat = new GsonDataFormat(InputPost.class);
+        JacksonDataFormat inputPostDataFormat = new JacksonDataFormat(InputPost.class);
 
         from("activemq:inputItemQueue")
                 .log("Read MEsssage From active MQ: ${body}")

@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 
 @Component
-public class Bootstrap implements
-        ApplicationListener<ContextRefreshedEvent> {
+public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private DataSource dataSource;

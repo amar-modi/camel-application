@@ -23,13 +23,13 @@ public class RestApiRoute extends RouteBuilder {
         CamelContext context = new DefaultCamelContext();
         context.setStreamCaching(true);
 
-        GsonDataFormat inputPostFormat = new GsonDataFormat(InputPost.class);
-
         errorHandler(deadLetterChannel("log:errorInRoute?level=ERROR&showProperties=true")
                 .maximumRedeliveries(3)
                 .redeliveryDelay(3000)
                 .backOffMultiplier(2)
                 .retryAttemptedLogLevel(LoggingLevel.ERROR));
+
+        // some error code Http code any error message Error stack trace
 
         // Sets up the REST configuration for the endpoint
         restConfiguration()
