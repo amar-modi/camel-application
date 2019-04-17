@@ -53,7 +53,7 @@ toRoute: jdbc:dataSource
 selectNode: sql:select * from input_posts where id =:#id limit 1?dataSource=#dataSource
 selectCountryNode: sql:select * from country where country_code=:#countryId?dataSource=#dataSource
 restEndpointRoute: http://localhost:8082/country
-restClientTimerRoute: timer:restRoute?period=10s
+restClientTimerRoute: timer:restRoute?period=60s
 restClient: direct:restClient
 dbNode: jdbc:dataSource
 writeMQRoute: direct:writeQueue
