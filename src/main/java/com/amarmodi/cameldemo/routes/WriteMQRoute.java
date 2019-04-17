@@ -37,6 +37,7 @@ public class WriteMQRoute extends RouteBuilder {
 
         from("{{writeMQRoute}}")
                 .routeId("mq-write-route")
+                .log("The body received on writeMQRoute is ${body}")
                 .process(exchange -> {
                     Object failId = exchange.getIn().getHeader("failId");
                     if(failId != null){
@@ -63,13 +64,12 @@ public class WriteMQRoute extends RouteBuilder {
 
         from("{{processMQMessageRoute}}")
                 .routeId("process-mq-route")
-//                .convertBodyTo(String.class)
                 .marshal(postFormat)
-                .log("The body is 333333333 ${body}")
+                .log("The body being sent to MQ queue is: ${body}")
                 .to("log:?level=INFO&showBody=true")
-                .loadBalance().random()
                     .to(ExchangePattern.InOnly,"activemq:queue:dummyItemQueue1")
-                    .to(ExchangePattern.InOnly,"activemq:queue:dummyItemQueue2")
+                .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(201))
+                .setBody(constant("The request was processed and created"))
                 .end();
 
     }

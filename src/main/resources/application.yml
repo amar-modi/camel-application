@@ -10,6 +10,7 @@ spring:
     brokerUrl: tcp://localhost:61616
     user: admin
     password: admin
+    packages.trust-all: true
 
 logging:
   level:
@@ -49,13 +50,14 @@ secondLevelPostRoute: direct:secondLevelPostRoute
 processMQMessageRoute: direct:processMQMessageRoute
 errorQueue: activemq:errorItemQueue
 toRoute: jdbc:dataSource
-selectNode: sql:select * from input_posts where id =:#id?dataSource=#dataSource
+selectNode: sql:select * from input_posts where id =:#id limit 1?dataSource=#dataSource
 selectCountryNode: sql:select * from country where country_code=:#countryId?dataSource=#dataSource
 restEndpointRoute: http://localhost:8082/country
-restClient: timer:restRoute?period=10s
+restClientTimerRoute: timer:restRoute?period=10s
+restClient: direct:restClient
 dbNode: jdbc:dataSource
 writeMQRoute: direct:writeQueue
-
+mqDummyReadRoute: direct:mqDummyReadRoute
 ---
 spring:
   profiles: CI-DEV

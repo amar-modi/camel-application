@@ -16,7 +16,6 @@ import static org.junit.Assert.*;
 @RunWith(CamelSpringBootRunner.class)
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-@Ignore
 public class CountryRestRouteTest {
 
     @Autowired

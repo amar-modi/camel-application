@@ -11,7 +11,7 @@ import java.util.Random;
 @Component
 public class CountrySelectProcessor implements Processor {
 
-    private List<String> countryList = Arrays.asList("us","in","gb");
+    private List<String> countryList = Arrays.asList("us","us","us");
 
     @Override
     public void process(Exchange exchange) throws Exception {

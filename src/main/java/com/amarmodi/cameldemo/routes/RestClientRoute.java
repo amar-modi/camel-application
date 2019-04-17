@@ -14,7 +14,12 @@ public class RestClientRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+
+        from("{{restClientTimerRoute}}")
+                .to("{{restClient}}");
+
         from("{{restClient}}")
+                .log("The input for restClient was: ${body}")
                 // Just randomly picking a country and setting it in the header
                 .process(countrySelectProcessor)
                 // Assign the requestMethod type

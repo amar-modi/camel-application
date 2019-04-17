@@ -17,6 +17,7 @@ public class GetAllInputPostsRoute extends RouteBuilder {
         // GET
         from("direct:getService")
                 .routeId("direct-getService")
+                .log("The body is for the get ${body}")
                 .log("Invoking the getService and retrieving all data from database")
                 .to("sql:select * from input_posts?dataSource=dataSource")
                 .log("---> The body is : ${body}")
