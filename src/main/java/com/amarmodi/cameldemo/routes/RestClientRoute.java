@@ -19,13 +19,14 @@ public class RestClientRoute extends RouteBuilder {
                 .to("{{restClient}}");
 
         from("{{restClient}}")
+                .routeId("rest-client-route")
                 .log("The input for restClient was: ${body}")
                 // Just randomly picking a country and setting it in the header
                 .process(countrySelectProcessor)
                 // Assign the requestMethod type
                 .setHeader(Exchange.HTTP_METHOD, constant("GET"))
                 // this is the correct way to make a rest call
-                .setHeader(Exchange.HTTP_URI, simple("https://restcountries.eu/rest/v2/alpha/${header.countryId}"))
+                .setHeader(Exchange.HTTP_URI, simple("https://restcountries.eu/rest/v2/alpha/us"))
                 // Accessing the url and converting to string
                 .to("https://restcountries.eu/rest/v2/alpha/us").convertBodyTo(String.class)
 //                .log("The REST API returned: ${body}")
