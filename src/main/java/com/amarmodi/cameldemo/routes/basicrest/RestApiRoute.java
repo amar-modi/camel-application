@@ -60,7 +60,17 @@ public class RestApiRoute extends RouteBuilder {
                 .put("/{id}")
                     .bindingMode(RestBindingMode.json)
                     .type(InputPost.class)
-                    .to("direct:putService");
+                    .to("direct:putService")
+                .post("/mongo/")
+                    .bindingMode(RestBindingMode.json)
+                    .type(InputPost.class)
+                    .to("{{mongo.postRoute}}")
+                .get("/mongo/getAll")
+                    .consumes("application/json")
+                    .to("{{getAllMongoDBRoute}}")
+                .get("/mongo/{id}")
+                    .consumes("application/json")
+                    .to("{{mongo.getByIdRoute}}");
 
     }
 

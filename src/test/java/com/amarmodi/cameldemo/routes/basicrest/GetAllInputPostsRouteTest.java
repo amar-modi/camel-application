@@ -14,6 +14,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(CamelSpringBootRunner.class)
@@ -43,7 +44,16 @@ public class GetAllInputPostsRouteTest {
 
     @Test
     public void testGetAllPosts(){
-       List<InputPost> response= (List<InputPost>) producerTemplate.requestBody("direct:getService", "");
+
+        InputPost inputPost = new InputPost();
+        inputPost.setId(3);
+        String expect = "The request was processed and created";
+        inputPost.setName("Fake Person 123");
+        String responsePost= (String) producerTemplate.requestBody("direct:dbService", inputPost);
+        assertNotNull(responsePost);
+        assertEquals(expect,responsePost);
+
+        List<InputPost> response= (List<InputPost>) producerTemplate.requestBody("direct:getService", "");
        assertNotNull(response);
     }
 

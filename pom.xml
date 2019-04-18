@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
 <!--        1.5.xx-->
-        <version>2.1.4.RELEASE</version>
+        <version>1.5.9.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.amarmodi</groupId>
@@ -17,7 +17,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <camel.version>2.23.1</camel.version>
+        <camel.version>2.20.1</camel.version>
         <docker.image.prefix>amarmodi1784</docker.image.prefix>
         <docker.image.name>camel-rest-service</docker.image.name>
     </properties>
@@ -162,6 +162,13 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-consul-starter</artifactId>
             <version>${camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-mongodb</artifactId>
+            <version>${camel.version}</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

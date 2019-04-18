@@ -37,6 +37,7 @@ public class ActiveMQConfiguration {
     }
 
     @Bean
+    @Primary
     public PooledConnectionFactory pooledConnectionFactory(ActiveMQConnectionFactory activeMQConnectionFactory){
         PooledConnectionFactory pooledConnectionFactory = new PooledConnectionFactory();
         pooledConnectionFactory.setMaxConnections(10);

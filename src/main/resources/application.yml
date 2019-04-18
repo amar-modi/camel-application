@@ -11,6 +11,13 @@ spring:
     user: admin
     password: admin
     packages.trust-all: true
+  mongodb:
+    host: localhost
+    port: 27017
+    authenticationDatabase: admin
+    username: root
+    password: example
+    database: camel_demo
 
 logging:
   level:
@@ -58,6 +65,16 @@ restClient: direct:restClient
 dbNode: jdbc:dataSource
 writeMQRoute: direct:writeQueue
 mqDummyReadRoute: direct:mqDummyReadRoute
+getAllMongoDBRoute: direct:getAllMongoDBRoute
+getAllRequest: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=findAll
+mongoDbBeanConversionRoute: direct:mongoDbBeanConversionRoute
+
+mongo:
+  postRoute: direct:postRoute
+  insertInputPost: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=insert
+  getByIdRoute: direct:getByIdRoute
+  getByIdMongo: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=findOneByQuery
+
 ---
 spring:
   profiles: CI-DEV

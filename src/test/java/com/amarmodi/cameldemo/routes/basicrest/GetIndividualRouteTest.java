@@ -41,6 +41,14 @@ public class GetIndividualRouteTest {
 
     @Test
     public void testGetIndividualById(){
+        InputPost inputPost = new InputPost();
+        inputPost.setId(3);
+        String expect = "The request was processed and created";
+        inputPost.setName("Fake Person 123");
+        String responsePost= (String) producerTemplate.requestBody("direct:dbService", inputPost);
+        assertNotNull(responsePost);
+        assertEquals(expect,responsePost);
+
         List<InputPost> response = (List<InputPost>) producerTemplate.requestBodyAndHeader("direct:getInputId", "", "id", 3);
         assertEquals(3, response.get(0).getId());
     }
