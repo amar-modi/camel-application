@@ -32,9 +32,7 @@ public class MongoDBGetByIdRoute extends RouteBuilder {
                 .to("{{mongo.getByIdMongo}}")
                 .log("The output from the id query was ${body}")
                 .bean(mongoDBObjectToInputPosts)
-//                .to("{{mongoDbBeanConversionRoute}}")
                 .log("The converted input posts are ${body}")
-//                .to("mock:resultFindById")
                 .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(200));
 
     }
