@@ -1,10 +1,10 @@
 package com.amarmodi.cameldemo.routes.errorhandling;
 
 import com.amarmodi.cameldemo.exceptions.InvalidHeaderException;
+import com.google.gson.JsonObject;
 import org.apache.camel.Exchange;
 import org.apache.camel.Handler;
 import org.apache.camel.Message;
-import org.apache.camel.json.simple.JsonObject;
 import org.springframework.http.MediaType;
 
 public class PrepareErrorResponse {
@@ -22,8 +22,8 @@ public class PrepareErrorResponse {
         msg.setHeader(Exchange.HTTP_RESPONSE_CODE, 500);
 
         JsonObject errorMessage = new JsonObject();
-        errorMessage.put("error", "Bad Request");
-        errorMessage.put("reason", cause.getMessage());
+        errorMessage.addProperty("error", "Bad Request");
+        errorMessage.addProperty("reason", cause.getMessage());
         msg.setBody(errorMessage.toString());
         // we need to do the fault=false below in order to prevent a
         // HTTP 500 error code from being returned
