@@ -32,7 +32,7 @@ public class RestClientRoute extends RouteBuilder {
 //                .log("The REST API returned: ${body}")
                 .removeHeader(Exchange.HTTP_URI)
                 .setHeader(Exchange.HTTP_METHOD, constant("POST"))
-        .to("{{restEndpointRoute}}");
+        .to("mock:restEndpoint");
 
 
     }
