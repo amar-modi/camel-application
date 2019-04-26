@@ -30,8 +30,8 @@ public class ActiveMQConfiguration {
     public ActiveMQConnectionFactory activeMQConnectionFactory(){
         ActiveMQConnectionFactory activeMQConnectionFactory = new ActiveMQConnectionFactory();
         activeMQConnectionFactory.setBrokerURL(environment.getProperty("spring.activemq.brokerUrl"));
-        activeMQConnectionFactory.setPassword(environment.getProperty("spring.activemq.broker.password"));
-        activeMQConnectionFactory.setUserName(environment.getProperty("spring.activemq.broker.username"));
+        activeMQConnectionFactory.setPassword(environment.getProperty("spring.activemq.password"));
+        activeMQConnectionFactory.setUserName(environment.getProperty("spring.activemq.user"));
         activeMQConnectionFactory.setTrustAllPackages(true);
         return activeMQConnectionFactory;
     }
@@ -57,4 +57,8 @@ public class ActiveMQConfiguration {
         jmsConfiguration.setMaxConcurrentConsumers(10);
         return jmsConfiguration;
     }
+
+//    A new persistent messaging service has been created in your project. It will handle the protocol(s) "amqp".
+//    The username/password for accessing the service is admin/admin.
+
 }

@@ -1,23 +1,40 @@
 spring:
   profiles:
     active: @spring.profiles.active@
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/camelDb
+#    username: user
+#    password: password
+#  activemq:
+#    brokerUrl: tcp://localhost:61616
+#    user: admin
+#    password: admin
+#    packages.trust-all: true
+#  mongodb:
+#    host: localhost
+#    port: 27017
+#    authenticationDatabase: admin
+#    username: root
+#    password: example
+#    database: camel_demo
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/camelDb
-    username: user
-    password: password
-  activemq:
-    brokerUrl: tcp://localhost:61616
-    user: admin
-    password: admin
-    packages.trust-all: true
+    url: jdbc:postgresql://172.30.216.145:5432/sampledb
+    username: openshiftuser
+    password: openshiftpass
   mongodb:
-    host: localhost
+    host: mongodb
     port: 27017
     authenticationDatabase: admin
-    username: root
-    password: example
-    database: camel_demo
+    username: openshiftmongo
+    password: openshiftpass
+    database: sampledb
+  activemq:
+    brokerUrl: tcp://172.30.46.159:61616
+    user: userQ5D
+    password: t57Ahv6V
+    packages.trust-all: true
 
 logging:
   level:
@@ -97,3 +114,23 @@ account:
     domain: consul
   server:
     port: 8083
+---
+spring:
+  profiles: PROD
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://172.30.216.145:5432/sampledb
+    username: openshiftuser
+    password: openshiftpass
+  mongodb:
+    host: mongodb
+    port: 27017
+    authenticationDatabase: admin
+    username: openshiftmongo
+    password: openshiftpass
+    database: sampledb
+  activemq:
+    brokerUrl: tcp://172.30.46.159:61616
+    user: userQ5D
+    password: t57Ahv6V
+    packages.trust-all: true
