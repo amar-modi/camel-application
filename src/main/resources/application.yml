@@ -61,7 +61,7 @@ management:
 endpoints:
   enabled: false
   health:
-    enabled: true
+    enabled: false
 quickstart:
   generateOrderPeriod: 10s
   processOrderPeriod: 30s
