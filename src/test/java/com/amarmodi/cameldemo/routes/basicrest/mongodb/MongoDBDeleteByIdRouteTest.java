@@ -3,6 +3,7 @@ package com.amarmodi.cameldemo.routes.basicrest.mongodb;
 import com.amarmodi.cameldemo.domain.InputPost;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.test.junit4.CamelTestSupport;
 import org.apache.camel.test.spring.CamelSpringBootRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,7 @@ import static org.junit.Assert.*;
 @RunWith(CamelSpringBootRunner.class)
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class MongoDBDeleteByIdRouteTest {
+public class MongoDBDeleteByIdRouteTest extends CamelTestSupport {
 
     @Autowired
     private CamelContext context;

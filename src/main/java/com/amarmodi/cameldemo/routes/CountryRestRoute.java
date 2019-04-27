@@ -31,19 +31,19 @@ public class CountryRestRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        JacksonDataFormat countryFormat = new JacksonDataFormat(Country.class);
-        // POST Endpoint
-        from("restlet:http://localhost:8082/country?restletMethods=POST")
-                .routeId("countryPostRoute")
-                .log("Received body from the call is ${body}")
-                .unmarshal(countryFormat)
-                .log("Unmarshalled record is ${body}")
-                .process(countrySQLProcessor)
-                .to("{{dbNode}}")
-                .to("{{selectCountryNode}}")
-                .convertBodyTo(String.class)
-                .log("Inserted country ${body}")
-                .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(201));
+//        JacksonDataFormat countryFormat = new JacksonDataFormat(Country.class);
+//        // POST Endpoint
+//        from("restlet:http://localhost:8082/country?restletMethods=POST")
+//                .routeId("countryPostRoute")
+//                .log("Received body from the call is ${body}")
+//                .unmarshal(countryFormat)
+//                .log("Unmarshalled record is ${body}")
+//                .process(countrySQLProcessor)
+//                .to("{{dbNode}}")
+//                .to("{{selectCountryNode}}")
+//                .convertBodyTo(String.class)
+//                .log("Inserted country ${body}")
+//                .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(201));
 
     }
 }

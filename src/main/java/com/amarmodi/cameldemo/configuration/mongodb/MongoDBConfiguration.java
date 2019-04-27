@@ -21,8 +21,8 @@ public class MongoDBConfiguration {
         String database = mongoDBConnectionProperties.getDatabase();
         String host = mongoDBConnectionProperties.getHost();
         String port = mongoDBConnectionProperties.getPort();
-//        MongoClientURI mongoClientURI = new MongoClientURI("mongodb://"+username+":"+password+"@"+host+":"+port+"/"+authenticationDatabase);
-        MongoClientURI mongoClientURI = new MongoClientURI("mongodb://openshiftmongo:openshiftpass@mongodb/sampledb");
+        MongoClientURI mongoClientURI = new MongoClientURI("mongodb://"+username+":"+password+"@"+host+"/"+authenticationDatabase);
+//        MongoClientURI mongoClientURI = new MongoClientURI("mongodb://openshiftmongo:openshiftpass@mongodb/sampledb");
         MongoClient mongoClient = new MongoClient(mongoClientURI);
         return mongoClient;
     }

@@ -2,13 +2,11 @@ package com.amarmodi.cameldemo.routes;
 
 import com.amarmodi.cameldemo.domain.InputPost;
 import com.amarmodi.cameldemo.exceptions.InvalidHeaderException;
-import com.amarmodi.cameldemo.exceptions.InvalidInputException;
 import com.amarmodi.cameldemo.processors.InputPostsProcessor;
 import com.amarmodi.cameldemo.processors.InputValidationProcessor;
 import com.amarmodi.cameldemo.routes.errorhandling.PrepareErrorResponse;
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
-import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jackson.JacksonDataFormat;
 import org.springframework.beans.factory.annotation.Autowired;

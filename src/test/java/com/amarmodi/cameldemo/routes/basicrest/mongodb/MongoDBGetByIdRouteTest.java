@@ -5,7 +5,6 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.ConsumerTemplate;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.test.spring.CamelSpringBootRunner;
-import org.apache.camel.test.spring.MockEndpoints;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,11 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(CamelSpringBootRunner.class)
 @SpringBootTest
-@MockEndpoints
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MongoDBGetByIdRouteTest {
 
@@ -38,8 +37,16 @@ public class MongoDBGetByIdRouteTest {
 
     @Test
     public void testGetByIdMongoDBRoute() {
-        List<InputPost> response = (List<InputPost>) producerTemplate.requestBodyAndHeader("{{mongo.getByIdRoute}}", "", "id", 510);
+        InputPost inputPost = new InputPost();
+        inputPost.setName("Ernie");
+        int id = 510;
+        inputPost.setId(id);
+        InputPost responsePost = (InputPost) producerTemplate.requestBody("{{mongo.postRoute}}", inputPost);
+        assertEquals(inputPost.getId(), responsePost.getId());
+        assertEquals(inputPost.getName(), responsePost.getName());
+
+        List<InputPost> response = (List<InputPost>) producerTemplate.requestBodyAndHeader("{{mongo.getByIdRoute}}", "", "id", id);
         assertNotNull(response);
-        assertEquals(510, response.get(0).getId());
+        assertEquals(id, response.get(0).getId());
     }
 }
