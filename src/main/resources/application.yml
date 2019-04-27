@@ -83,7 +83,7 @@ dbNode: jdbc:dataSource
 writeMQRoute: direct:writeQueue
 mqDummyReadRoute: direct:mqDummyReadRoute
 getAllMongoDBRoute: direct:getAllMongoDBRoute
-getAllRequest: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=findAll
+getAllRequest: mongodb:mongodb?database=sampledb&collection=input_posts&operation=findAll
 mongoDbBeanConversionRoute: direct:mongoDbBeanConversionRoute
 
 mongo:
