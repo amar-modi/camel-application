@@ -12,8 +12,8 @@ public class MongoDBPutProcessor implements org.apache.camel.Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         InputPost post = (InputPost) exchange.getIn().getBody();
-        int id = (int) exchange.getIn().getHeader("id");
-        DBObject filterObject = new BasicDBObject("id", id);
+        String id = (String) exchange.getIn().getHeader("id");
+        DBObject filterObject = new BasicDBObject("id", Integer.valueOf(id));
         DBObject updateObject = new BasicDBObject("$set", new BasicDBObject("name", post.getName()));
         exchange.getOut().setBody((new Object[]{filterObject, updateObject}));
     }
