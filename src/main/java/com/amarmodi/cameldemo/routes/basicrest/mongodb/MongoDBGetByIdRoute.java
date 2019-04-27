@@ -24,8 +24,9 @@ public class MongoDBGetByIdRoute extends RouteBuilder {
         from("{{mongo.getByIdRoute}}")
                 .log("The received id is ${header.id}")
                 .process(exchange -> {
-                    int id = (int) exchange.getIn().getHeader("id");
-                    String jsonRequest= "{\t\"id\":" + id + "}";
+                    String id = (String) exchange.getIn().getHeader("id");
+//                    int id = (int) exchange.getIn().getHeader("id");
+                    String jsonRequest= "{\t\"id\":" + Integer.valueOf(id) + "}";
                     exchange.getOut().setBody(jsonRequest);
                 })
                 .log("The body for the query is logged ${body}")

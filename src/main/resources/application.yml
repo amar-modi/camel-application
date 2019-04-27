@@ -1,23 +1,40 @@
 spring:
   profiles:
     active: @spring.profiles.active@
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/camelDb
+#    username: user
+#    password: password
+#  activemq:
+#    brokerUrl: tcp://localhost:61616
+#    user: admin
+#    password: admin
+#    packages.trust-all: true
+#  mongodb:
+#    host: localhost:27017
+#    port: 27017
+#    authenticationDatabase: admin
+#    username: root
+#    password: example
+#    database: camel_demo
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/camelDb
-    username: user
-    password: password
-  activemq:
-    brokerUrl: tcp://localhost:61616
-    user: admin
-    password: admin
-    packages.trust-all: true
+    url: jdbc:postgresql://172.30.216.145:5432/sampledb
+    username: openshiftuser
+    password: openshiftpass
   mongodb:
-    host: localhost
+    host: mongodb
     port: 27017
-    authenticationDatabase: admin
-    username: root
-    password: example
-    database: camel_demo
+    authenticationDatabase: sampledb
+    username: openshiftmongo
+    password: openshiftpass
+    database: sampledb
+  activemq:
+    brokerUrl: tcp://172.30.46.159:61616
+    user: userQ5D
+    password: t57Ahv6V
+    packages.trust-all: true
 
 logging:
   level:
@@ -44,7 +61,7 @@ management:
 endpoints:
   enabled: false
   health:
-    enabled: true
+    enabled: false
 quickstart:
   generateOrderPeriod: 10s
   processOrderPeriod: 30s
@@ -66,18 +83,18 @@ dbNode: jdbc:dataSource
 writeMQRoute: direct:writeQueue
 mqDummyReadRoute: direct:mqDummyReadRoute
 getAllMongoDBRoute: direct:getAllMongoDBRoute
-getAllRequest: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=findAll
+getAllRequest: mongodb:mongodb?database=sampledb&collection=input_posts&operation=findAll
 mongoDbBeanConversionRoute: direct:mongoDbBeanConversionRoute
 
 mongo:
   postRoute: direct:postRoute
-  insertInputPost: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=insert
+  insertInputPost: mongodb:mongodb?database=sampledb&collection=input_posts&operation=insert
   getByIdRoute: direct:getByIdRoute
-  getByIdMongo: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=findOneByQuery
+  getByIdMongo: mongodb:mongodb?database=sampledb&collection=input_posts&operation=findOneByQuery
   putByIdRoute: direct:putByIdRoute
-  putByIdMongo: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=update
+  putByIdMongo: mongodb:mongodb?database=sampledb&collection=input_posts&operation=update
   deleteByIdRoute: direct:deleteByIdRoute
-  deleteByIdMongo: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=remove
+  deleteByIdMongo: mongodb:mongodb?database=sampledb&collection=input_posts&operation=remove
 ---
 spring:
   profiles: CI-DEV
@@ -97,3 +114,23 @@ account:
     domain: consul
   server:
     port: 8083
+---
+spring:
+  profiles: PROD
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://172.30.216.145:5432/sampledb
+    username: openshiftuser
+    password: openshiftpass
+  mongodb:
+    host: mongodb
+    port: 27017
+    authenticationDatabase: admin
+    username: openshiftmongo
+    password: openshiftpass
+    database: sampledb
+  activemq:
+    brokerUrl: tcp://172.30.46.159:61616
+    user: userQ5D
+    password: t57Ahv6V
+    packages.trust-all: true

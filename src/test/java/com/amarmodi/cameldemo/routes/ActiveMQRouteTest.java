@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 @RunWith(CamelSpringBootRunner.class)
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class ActiveMQRouteTest {
+public class ActiveMQRouteTest extends CamelTestSupport{
 
     @Autowired
     private CamelContext context;
