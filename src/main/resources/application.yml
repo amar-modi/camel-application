@@ -88,13 +88,13 @@ mongoDbBeanConversionRoute: direct:mongoDbBeanConversionRoute
 
 mongo:
   postRoute: direct:postRoute
-  insertInputPost: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=insert
+  insertInputPost: mongodb:mongodb?database=sampledb&collection=input_posts&operation=insert
   getByIdRoute: direct:getByIdRoute
-  getByIdMongo: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=findOneByQuery
+  getByIdMongo: mongodb:mongodb?database=sampledb&collection=input_posts&operation=findOneByQuery
   putByIdRoute: direct:putByIdRoute
-  putByIdMongo: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=update
+  putByIdMongo: mongodb:mongodb?database=sampledb&collection=input_posts&operation=update
   deleteByIdRoute: direct:deleteByIdRoute
-  deleteByIdMongo: mongodb:mongodb?database=camel_demo&collection=input_posts&operation=remove
+  deleteByIdMongo: mongodb:mongodb?database=sampledb&collection=input_posts&operation=remove
 ---
 spring:
   profiles: CI-DEV
